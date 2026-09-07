@@ -12,138 +12,456 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CCNP 虎の巻 - Portal -</title>
-    <style>
-        :root {
-            --card-bg: rgba(255, 255, 255, 0.95); /* ボタンの背景はほぼ白（読みやすさのため） */
-            --footer-bg: #eeeeee;
-            --accent-blue: #007aff;
-            --text-dark: #1d1d1f;
+<style>
+    :root {
+        --bg-dark: #0b1020;
+        --bg-card: rgba(20, 28, 48, 0.88);
+        --bg-card-hover: rgba(29, 40, 68, 0.96);
+
+        --accent-blue: #4da3ff;
+        --accent-cyan: #63e6ff;
+
+        --text-main: #f5f7ff;
+        --text-sub: #aeb8cc;
+
+        --footer-bg: #080c17;
+        --border: rgba(255, 255, 255, 0.12);
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+        font-family:
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            "Noto Sans JP",
+            sans-serif;
+
+        background:
+            radial-gradient(
+                circle at 50% 0%,
+                rgba(77, 163, 255, 0.18),
+                transparent 45%
+            ),
+            linear-gradient(
+                135deg,
+                #080c18 0%,
+                #10182b 50%,
+                #080c18 100%
+            );
+
+        color: var(--text-main);
+    }
+
+    body {
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    /* 背景画像 */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+
+        background-image: url('images/background_pattern.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        opacity: 0.18;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* 青い光 */
+    body::after {
+        content: "";
+        position: fixed;
+
+        width: 500px;
+        height: 500px;
+
+        top: -200px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        background: rgba(77, 163, 255, 0.12);
+        filter: blur(100px);
+
+        border-radius: 50%;
+
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .wrapper {
+        position: relative;
+        z-index: 1;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        min-height: 100vh;
+    }
+
+    /* =========================
+       メインエリア
+       ========================= */
+
+    .content-main {
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        max-width: 900px;
+
+        padding: 80px 20px 100px;
+    }
+
+    /* =========================
+       ロゴ
+       ========================= */
+
+    .header-logo {
+        width: 100%;
+        max-width: 480px;
+
+        margin-bottom: 60px;
+
+        text-align: center;
+
+        animation: logoFade 0.8s ease-out;
+    }
+
+    .header-logo img {
+        width: 100%;
+        height: auto;
+
+        filter:
+            drop-shadow(0 15px 30px rgba(0, 0, 0, 0.55))
+            drop-shadow(0 0 25px rgba(77, 163, 255, 0.18));
+    }
+
+    /* =========================
+       メニューボタン
+       ========================= */
+
+    .menu-container {
+        width: 100%;
+        max-width: 520px;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+    .btn-portal {
+        position: relative;
+
+        display: block;
+
+        padding: 22px 28px;
+
+        background:
+            linear-gradient(
+                135deg,
+                rgba(30, 42, 68, 0.92),
+                rgba(14, 21, 38, 0.92)
+            );
+
+        border: 1px solid var(--border);
+        border-radius: 14px;
+
+        color: var(--text-main);
+
+        text-decoration: none;
+
+        font-size: 1.08rem;
+        font-weight: 600;
+
+        letter-spacing: 0.04em;
+
+        text-align: center;
+
+        box-shadow:
+            0 10px 35px rgba(0, 0, 0, 0.35),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+        backdrop-filter: blur(12px);
+
+        overflow: hidden;
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease,
+            border-color 0.25s ease,
+            background 0.25s ease;
+    }
+
+    /* 左側の青いライン */
+    .btn-portal::before {
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+        top: 0;
+        bottom: 0;
+
+        width: 3px;
+
+        background: linear-gradient(
+            to bottom,
+            var(--accent-blue),
+            var(--accent-cyan)
+        );
+
+        opacity: 0.7;
+
+        transition: opacity 0.25s ease;
+    }
+
+    /* 上部の光 */
+    .btn-portal::after {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        left: -100%;
+
+        width: 70%;
+        height: 100%;
+
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.08),
+            transparent
+        );
+
+        transform: skewX(-20deg);
+
+        transition: left 0.5s ease;
+    }
+
+    .btn-portal:hover {
+        transform: translateY(-5px);
+
+        background:
+            linear-gradient(
+                135deg,
+                rgba(39, 55, 89, 0.98),
+                rgba(18, 28, 50, 0.98)
+            );
+
+        border-color: rgba(77, 163, 255, 0.55);
+
+        box-shadow:
+            0 18px 45px rgba(0, 0, 0, 0.45),
+            0 0 25px rgba(77, 163, 255, 0.12);
+    }
+
+    .btn-portal:hover::before {
+        opacity: 1;
+    }
+
+    .btn-portal:hover::after {
+        left: 130%;
+    }
+
+    /* =========================
+       お問い合わせエリア
+       ========================= */
+
+    .contact-section {
+        width: 100%;
+
+        padding: 55px 20px 40px;
+
+        background:
+            linear-gradient(
+                180deg,
+                rgba(8, 12, 23, 0.75),
+                rgba(5, 8, 16, 0.98)
+            );
+
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+        text-align: center;
+
+        backdrop-filter: blur(10px);
+    }
+
+    .contact-section h2 {
+        margin: 0 0 28px;
+
+        color: var(--text-main);
+
+        font-size: 0.95rem;
+        font-weight: 600;
+
+        letter-spacing: 0.16em;
+
+        position: relative;
+    }
+
+    .contact-section h2::after {
+        content: "";
+
+        display: block;
+
+        width: 35px;
+        height: 2px;
+
+        margin: 12px auto 0;
+
+        background: linear-gradient(
+            90deg,
+            var(--accent-blue),
+            var(--accent-cyan)
+        );
+
+        border-radius: 10px;
+    }
+
+    /* =========================
+       お問い合わせボタン
+       ========================= */
+
+    .contact-btn-group {
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        gap: 12px;
+
+        flex-wrap: wrap;
+
+        padding: 0 10px;
+    }
+
+    .btn-contact {
+        display: inline-block;
+
+        padding: 11px 18px;
+
+        background: rgba(255, 255, 255, 0.04);
+
+        border: 1px solid rgba(255, 255, 255, 0.14);
+
+        border-radius: 8px;
+
+        color: var(--text-sub);
+
+        text-decoration: none;
+
+        font-size: 0.82rem;
+        font-weight: 500;
+
+        transition:
+            background 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .btn-contact:hover {
+        background: rgba(77, 163, 255, 0.08);
+
+        border-color: rgba(77, 163, 255, 0.5);
+
+        color: var(--accent-blue);
+
+        transform: translateY(-2px);
+    }
+
+    /* =========================
+       コピーライト
+       ========================= */
+
+    .copyright {
+        margin-top: 32px;
+
+        color: #657086;
+
+        font-size: 0.7rem;
+
+        letter-spacing: 0.08em;
+    }
+
+    /* =========================
+       ロゴ表示アニメーション
+       ========================= */
+
+    @keyframes logoFade {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
         }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            /* ② 背景画像を透過させず、そのまま表示 */
-            background-image: url('images/background_pattern.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* スクロールしても背景は固定 */
-            background-repeat: no-repeat;
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
+    }
 
-        /* 透過用のオーバーレイ（膜）を削除、または完全に透明にする */
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            /* 背景がハッキリ見える分、コンテンツの視認性を上げるための設定 */
-        }
+    /* =========================
+       スマートフォン
+       ========================= */
+
+    @media (max-width: 600px) {
 
         .content-main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 20px;
-            width: 100%;
+            padding: 55px 18px 70px;
         }
 
-        /* ① タイトルロゴ */
         .header-logo {
-            width: 100%;
-            max-width: 500px;
-            margin-bottom: 50px;
-            text-align: center;
-        }
-        .header-logo img {
-            width: 100%;
-            height: auto;
-            /* 背景がハッキリしているため、ロゴに強い影をつけて浮き立たせる */
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            max-width: 360px;
+            margin-bottom: 45px;
         }
 
-        /* ③ ボタンエリア */
         .menu-container {
-            width: 100%;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            max-width: 100%;
+            gap: 14px;
         }
 
         .btn-portal {
-            background: var(--card-bg);
-            border: none;
-            border-radius: 16px;
-            padding: 22px;
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 700;
-            font-size: 1.15rem;
-            text-align: center;
-            transition: 0.3s;
-            /* ボタンが背景に埋もれないよう、ハッキリとした影をつける */
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            padding: 20px 22px;
+            font-size: 1rem;
         }
 
-        .btn-portal:hover {
-            background: #ffffff;
-            color: var(--accent-blue);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        /* ④ お問い合わせ窓口（欄外グレーエリア） */
         .contact-section {
-            background-color: var(--footer-bg);
-            width: 100%;
-            padding: 50px 0;
-            text-align: center;
-            border-top: 1px solid #ccc;
-        }
-
-        .contact-section h2 {
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            color: #333;
+            padding: 40px 15px 30px;
         }
 
         .contact-btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            padding: 0 20px;
+            flex-direction: column;
+            gap: 9px;
         }
 
         .btn-contact {
-            background: #ffffff;
-            border: 1px solid #999;
-            color: #555;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: 0.2s;
+            width: 100%;
+            max-width: 360px;
         }
-
-        .btn-contact:hover {
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
-            background: #fdfdfd;
-        }
-
-        .copyright {
-            font-size: 0.75rem;
-            color: #777;
-            margin-top: 30px;
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
 
