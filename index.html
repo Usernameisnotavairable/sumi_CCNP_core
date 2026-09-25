@@ -1,42 +1,97 @@
 <!DOCTYPE html>
 <html lang="ja">
+<!-- HTML文書の言語を日本語に設定します。 -->
+
 <head>
+<!-- ページの設定情報を記述する部分です。 -->
+
 　<script>
+  // JavaScriptの処理を記述する場所です。
+  // 現在はすべてコメントアウトされているため、実際には実行されません。
+
   // const password = prompt("baudroie");
+  // 「baudroie」という文字を入力するパスワード入力画面を表示する処理です。
+  // ただし、現在はコメントアウトされているため実行されません。
+
   // if (password !== "0420") { // ★ここに好きなパスワードを設定
+  // 入力されたパスワードが「0420」と違う場合に処理を実行する条件です。
+  // 現在はコメントアウトされています。
+
   //   alert("パスワードが違います。");
+  // パスワードが間違っている場合に警告メッセージを表示する処理です。
+
   //   document.body.innerHTML = "<h1>閲覧権限がありません</h1>";
+  // ページの内容を「閲覧権限がありません」という表示に変更する処理です。
+
   //   window.location.href = "about:blank"; // 白紙ページへ飛ばす
+  // ブラウザを白紙ページへ移動させる処理です。
+
   // }
+  // if文の終了を表します。
 　</script>
+<!-- JavaScriptの記述部分を終了します。 -->
+
     <meta charset="UTF-8">
+    <!-- 文字コードをUTF-8に設定します。日本語を正しく表示するための設定です。 -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- スマートフォンなどで画面幅に合わせて表示するための設定です。 -->
+
     <title>CCNP CORE 確認テスト - Portal -</title>
+    <!-- ブラウザのタブに表示されるタイトルです。 -->
+
 <style>
+/* ここからCSSを記述します。 */
+
+/* CSSで使用する共通の変数を定義します。 */
     :root {
+        /* ページ全体の暗い背景色を定義します。 */
         --bg-dark: #0b1020;
+
+        /* カードの背景色を定義します。 */
         --bg-card: rgba(20, 28, 48, 0.88);
+
+        /* カードにマウスを重ねたときの背景色を定義します。 */
         --bg-card-hover: rgba(29, 40, 68, 0.96);
 
+        /* 青色のアクセントカラーを定義します。 */
         --accent-blue: #4da3ff;
+
+        /* 水色のアクセントカラーを定義します。 */
         --accent-cyan: #63e6ff;
 
+        /* メインの文字色を定義します。 */
         --text-main: #f5f7ff;
+
+        /* 補助的な文字色を定義します。 */
         --text-sub: #aeb8cc;
 
+        /* フッターの背景色を定義します。 */
         --footer-bg: #080c17;
+
+        /* 枠線の色を定義します。 */
         --border: rgba(255, 255, 255, 0.12);
     }
 
+/* すべてのHTML要素に共通する設定です。 */
     * {
+        /* widthやheightにpaddingとborderを含めて計算します。 */
         box-sizing: border-box;
     }
 
+/* htmlとbodyの両方に設定を適用します。 */
     html,
     body {
+        /* ブラウザ標準の外側の余白をなくします。 */
         margin: 0;
+
+        /* ブラウザ標準の内側の余白をなくします。 */
         padding: 0;
+
+        /* 最低でも画面全体の高さを確保します。 */
         min-height: 100%;
+
+        /* 使用するフォントを指定します。 */
         font-family:
             -apple-system,
             BlinkMacSystemFont,
@@ -44,12 +99,16 @@
             "Noto Sans JP",
             sans-serif;
 
+        /* 背景を設定します。 */
         background:
+            /* 上中央に青い光を配置するグラデーションです。 */
             radial-gradient(
                 circle at 50% 0%,
                 rgba(77, 163, 255, 0.18),
                 transparent 45%
             ),
+
+            /* ページ全体に斜め方向の暗いグラデーションを設定します。 */
             linear-gradient(
                 135deg,
                 #080c18 0%,
@@ -57,126 +116,221 @@
                 #080c18 100%
             );
 
+        /* 通常の文字色を設定します。 */
         color: var(--text-main);
     }
 
+/* bodyに対する設定です。 */
     body {
+        /* bodyを基準にした位置指定ができるようにします。 */
         position: relative;
+
+        /* 横方向にはみ出した内容を表示しないようにします。 */
         overflow-x: hidden;
     }
 
-    /* 背景画像 */
+/* =========================
+   背景画像
+   ========================= */
+
+/* bodyの前面に背景画像を重ねます。 */
     body::before {
+        /* 疑似要素を表示するために空の内容を設定します。 */
         content: "";
+
+        /* 画面に固定して表示します。 */
         position: fixed;
+
+        /* 上下左右すべてを0にして画面全体を覆います。 */
         inset: 0;
 
+        /* 背景画像を指定します。 */
         background-image: url('images/background_pattern.png');
+
+        /* 背景画像を画面全体に合わせます。 */
         background-size: cover;
+
+        /* 背景画像の中央を表示します。 */
         background-position: center;
+
+        /* 背景画像を繰り返しません。 */
         background-repeat: no-repeat;
 
+        /* 背景画像を18%の透明度で表示します。 */
         opacity: 0.18;
+
+        /* 他の通常の要素より後ろに配置します。 */
         z-index: 0;
+
+        /* マウス操作の対象にしません。 */
         pointer-events: none;
     }
 
-    /* 青い光 */
+/* =========================
+   青い光
+   ========================= */
+
+/* bodyの後ろ側に青い光を作ります。 */
     body::after {
+        /* 疑似要素を表示します。 */
         content: "";
+
+        /* 画面に固定して配置します。 */
         position: fixed;
 
+        /* 青い光の横幅を500pxにします。 */
         width: 500px;
+
+        /* 青い光の高さを500pxにします。 */
         height: 500px;
 
+        /* 画面上部から-200pxの位置に配置します。 */
         top: -200px;
+
+        /* 左端を画面中央にします。 */
         left: 50%;
 
+        /* 自分自身の幅の半分だけ左へ移動して中央にします。 */
         transform: translateX(-50%);
 
+        /* 青い光の色と透明度を設定します。 */
         background: rgba(77, 163, 255, 0.12);
+
+        /* 光をぼかします。 */
         filter: blur(100px);
 
+        /* 円形にします。 */
         border-radius: 50%;
 
+        /* 背景画像などと同じ背面レイヤーに配置します。 */
         z-index: 0;
+
+        /* マウス操作の対象にしません。 */
         pointer-events: none;
     }
 
+/* ページ全体を包む要素です。 */
     .wrapper {
+        /* 子要素を基準にした位置指定を可能にします。 */
         position: relative;
+
+        /* 背景より前に表示します。 */
         z-index: 1;
 
+        /* Flexboxを使用します。 */
         display: flex;
+
+        /* 子要素を縦方向に並べます。 */
         flex-direction: column;
+
+        /* 子要素を横方向の中央に配置します。 */
         align-items: center;
 
+        /* 画面の高さ以上になるようにします。 */
         min-height: 100vh;
     }
 
-    /* =========================
-       メインエリア
-       ========================= */
+/* =========================
+   メインエリア
+   ========================= */
 
+/* ページ中央のメイン部分です。 */
     .content-main {
+        /* 余った縦方向のスペースを使用します。 */
         flex: 1;
 
+        /* Flexboxを使用します。 */
         display: flex;
+
+        /* 子要素を縦方向に並べます。 */
         flex-direction: column;
+
+        /* 子要素を横方向の中央に配置します。 */
         align-items: center;
+
+        /* 子要素を縦方向の中央に配置します。 */
         justify-content: center;
 
+        /* 横幅を100%にします。 */
         width: 100%;
+
+        /* 最大横幅を900pxにします。 */
         max-width: 900px;
 
+        /* 上・左右・下の余白を設定します。 */
         padding: 80px 20px 100px;
     }
 
-    /* =========================
-       ロゴ
-       ========================= */
+/* =========================
+   ロゴ
+   ========================= */
 
+/* ロゴを配置する領域です。 */
     .header-logo {
+        /* 横幅を100%まで広げます。 */
         width: 100%;
+
+        /* ロゴの最大幅を480pxにします。 */
         max-width: 480px;
 
+        /* ロゴの下側に60pxの余白を作ります。 */
         margin-bottom: 60px;
 
+        /* ロゴを中央揃えにします。 */
         text-align: center;
 
+        /* ロゴ表示時のアニメーションを設定します。 */
         animation: logoFade 0.8s ease-out;
     }
 
+/* ロゴ画像そのものに対する設定です。 */
     .header-logo img {
+        /* 画像の横幅を親要素いっぱいにします。 */
         width: 100%;
+
+        /* 画像の高さを自動調整します。 */
         height: auto;
 
+        /* 画像に影と青い光を付けます。 */
         filter:
             drop-shadow(0 15px 30px rgba(0, 0, 0, 0.55))
             drop-shadow(0 0 25px rgba(77, 163, 255, 0.18));
     }
 
-    /* =========================
-       メニューボタン
-       ========================= */
+/* =========================
+   メニューボタン
+   ========================= */
 
+/* メニューボタン全体を入れる領域です。 */
     .menu-container {
+        /* 横幅を100%にします。 */
         width: 100%;
+
+        /* 最大横幅を520pxにします。 */
         max-width: 520px;
 
+        /* Flexboxを使用します。 */
         display: flex;
+
+        /* ボタンを縦方向に並べます。 */
         flex-direction: column;
 
+        /* ボタン同士の間隔を18pxにします。 */
         gap: 18px;
     }
 
+/* ポータルの各ボタンに対する設定です。 */
     .btn-portal {
+        /* 疑似要素の位置指定の基準にします。 */
         position: relative;
 
+        /* aタグをブロック要素として表示します。 */
         display: block;
 
+        /* ボタンの内側の余白を設定します。 */
         padding: 22px 28px;
 
+        /* ボタンの背景にグラデーションを設定します。 */
         background:
             linear-gradient(
                 135deg,
@@ -184,28 +338,42 @@
                 rgba(14, 21, 38, 0.92)
             );
 
+        /* ボタンの枠線を設定します。 */
         border: 1px solid var(--border);
+
+        /* ボタンの角を丸くします。 */
         border-radius: 14px;
 
+        /* ボタンの文字色を設定します。 */
         color: var(--text-main);
 
+        /* リンクの下線を消します。 */
         text-decoration: none;
 
+        /* 文字の大きさを設定します。 */
         font-size: 1.08rem;
+
+        /* 文字を少し太くします。 */
         font-weight: 600;
 
+        /* 文字同士の間隔を少し広げます。 */
         letter-spacing: 0.04em;
 
+        /* 文字を中央揃えにします。 */
         text-align: center;
 
+        /* ボタンに影を付けます。 */
         box-shadow:
             0 10px 35px rgba(0, 0, 0, 0.35),
             inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
+        /* 背景をぼかしてガラスのような表示にします。 */
         backdrop-filter: blur(12px);
 
+        /* ボタンからはみ出した内容を隠します。 */
         overflow: hidden;
 
+        /* マウスを乗せたときの変化を滑らかにします。 */
         transition:
             transform 0.25s ease,
             box-shadow 0.25s ease,
@@ -213,41 +381,61 @@
             background 0.25s ease;
     }
 
-    /* 左側の青いライン */
+/* 左側の青いライン */
     .btn-portal::before {
+        /* 疑似要素を表示します。 */
         content: "";
 
+        /* ボタンを基準に配置します。 */
         position: absolute;
 
+        /* 左端に配置します。 */
         left: 0;
+
+        /* 上端に配置します。 */
         top: 0;
+
+        /* 下端まで広げます。 */
         bottom: 0;
 
+        /* ラインの幅を3pxにします。 */
         width: 3px;
 
+        /* 青から水色へのグラデーションを設定します。 */
         background: linear-gradient(
             to bottom,
             var(--accent-blue),
             var(--accent-cyan)
         );
 
+        /* 最初は少し透明にします。 */
         opacity: 0.7;
 
+        /* 透明度の変化を滑らかにします。 */
         transition: opacity 0.25s ease;
     }
 
-    /* 上部の光 */
+/* 上部の光 */
     .btn-portal::after {
+        /* 疑似要素を表示します。 */
         content: "";
 
+        /* ボタンを基準に配置します。 */
         position: absolute;
 
+        /* 上端に配置します。 */
         top: 0;
+
+        /* 最初は左側の外に配置します。 */
         left: -100%;
 
+        /* 光の横幅を70%にします。 */
         width: 70%;
+
+        /* 光の高さをボタン全体にします。 */
         height: 100%;
 
+        /* 左から右へ透明な光を作ります。 */
         background: linear-gradient(
             90deg,
             transparent,
@@ -255,14 +443,19 @@
             transparent
         );
 
+        /* 光を少し斜めにします。 */
         transform: skewX(-20deg);
 
+        /* 光が移動するアニメーションを設定します。 */
         transition: left 0.5s ease;
     }
 
+/* ボタンにマウスを乗せたときの設定です。 */
     .btn-portal:hover {
+        /* ボタンを5px上へ移動させます。 */
         transform: translateY(-5px);
 
+        /* マウスを乗せたときの背景色を変更します。 */
         background:
             linear-gradient(
                 135deg,
@@ -270,30 +463,38 @@
                 rgba(18, 28, 50, 0.98)
             );
 
+        /* 枠線を青くします。 */
         border-color: rgba(77, 163, 255, 0.55);
 
+        /* 影を強くします。 */
         box-shadow:
             0 18px 45px rgba(0, 0, 0, 0.45),
             0 0 25px rgba(77, 163, 255, 0.12);
     }
 
+/* ボタンにマウスを乗せたとき、左側の青いラインを明るくします。 */
     .btn-portal:hover::before {
         opacity: 1;
     }
 
+/* ボタンにマウスを乗せたとき、光を右側へ移動させます。 */
     .btn-portal:hover::after {
         left: 130%;
     }
 
-    /* =========================
-       お問い合わせエリア
-       ========================= */
+/* =========================
+   お問い合わせエリア
+   ========================= */
 
+/* お問い合わせ部分全体です。 */
     .contact-section {
+        /* 横幅を100%にします。 */
         width: 100%;
 
+        /* 上・左右・下の余白を設定します。 */
         padding: 55px 20px 40px;
 
+        /* 上から下へ暗くなる背景を設定します。 */
         background:
             linear-gradient(
                 180deg,
@@ -301,80 +502,120 @@
                 rgba(5, 8, 16, 0.98)
             );
 
+        /* 上側に薄い枠線を表示します。 */
         border-top: 1px solid rgba(255, 255, 255, 0.08);
 
+        /* 中の文字を中央揃えにします。 */
         text-align: center;
 
+        /* 背景をぼかします。 */
         backdrop-filter: blur(10px);
     }
 
+/* お問い合わせエリアの見出しです。 */
     .contact-section h2 {
+        /* 上の余白を0、下の余白を28pxにします。 */
         margin: 0 0 28px;
 
+        /* 見出しの文字色を設定します。 */
         color: var(--text-main);
 
+        /* 文字サイズを設定します。 */
         font-size: 0.95rem;
+
+        /* 文字を少し太くします。 */
         font-weight: 600;
 
+        /* 文字間隔を広げます。 */
         letter-spacing: 0.16em;
 
+        /* 疑似要素の位置指定の基準にします。 */
         position: relative;
     }
 
+/* 見出しの下に青いラインを表示します。 */
     .contact-section h2::after {
+        /* 疑似要素を表示します。 */
         content: "";
 
+        /* ブロック要素として表示します。 */
         display: block;
 
+        /* ラインの幅を35pxにします。 */
         width: 35px;
+
+        /* ラインの高さを2pxにします。 */
         height: 2px;
 
+        /* ラインを中央に配置し、上に12pxの余白を作ります。 */
         margin: 12px auto 0;
 
+        /* 青から水色へのグラデーションを設定します。 */
         background: linear-gradient(
             90deg,
             var(--accent-blue),
             var(--accent-cyan)
         );
 
+        /* ラインの角を丸くします。 */
         border-radius: 10px;
     }
 
-    /* =========================
-       お問い合わせボタン
-       ========================= */
+/* =========================
+   お問い合わせボタン
+   ========================= */
 
+/* お問い合わせボタンをまとめる領域です。 */
     .contact-btn-group {
+        /* Flexboxを使用します。 */
         display: flex;
 
+        /* 横方向の中央に配置します。 */
         justify-content: center;
+
+        /* 縦方向も中央に配置します。 */
         align-items: center;
 
+        /* ボタン同士の間隔を12pxにします。 */
         gap: 12px;
 
+        /* 横幅が足りない場合は折り返します。 */
         flex-wrap: wrap;
 
+        /* 左右に10pxの余白を作ります。 */
         padding: 0 10px;
     }
 
+/* お問い合わせボタンです。 */
     .btn-contact {
+        /* インラインブロックとして表示します。 */
         display: inline-block;
 
+        /* ボタン内部の余白を設定します。 */
         padding: 11px 18px;
 
+        /* ボタンの背景を少し透明にします。 */
         background: rgba(255, 255, 255, 0.04);
 
+        /* ボタンの枠線を設定します。 */
         border: 1px solid rgba(255, 255, 255, 0.14);
 
+        /* ボタンの角を丸くします。 */
         border-radius: 8px;
 
+        /* 文字色を設定します。 */
         color: var(--text-sub);
 
+        /* リンクの下線を消します。 */
         text-decoration: none;
 
+        /* 文字サイズを設定します。 */
         font-size: 0.82rem;
+
+        /* 文字を少し太くします。 */
         font-weight: 500;
 
+        /* マウスを乗せたときの変化を滑らかにします。 */
         transition:
             background 0.2s ease,
             color 0.2s ease,
@@ -382,112 +623,204 @@
             transform 0.2s ease;
     }
 
+/* お問い合わせボタンにマウスを乗せたときの設定です。 */
     .btn-contact:hover {
+        /* 背景を少し青くします。 */
         background: rgba(77, 163, 255, 0.08);
 
+        /* 枠線を青くします。 */
         border-color: rgba(77, 163, 255, 0.5);
 
+        /* 文字を青くします。 */
         color: var(--accent-blue);
 
+        /* ボタンを2px上へ移動します。 */
         transform: translateY(-2px);
     }
 
-    /* =========================
-       コピーライト
-       ========================= */
+/* =========================
+   コピーライト
+   ========================= */
 
+/* コピーライト部分です。 */
     .copyright {
+        /* 上に32pxの余白を作ります。 */
         margin-top: 32px;
 
+        /* コピーライトの文字色を設定します。 */
         color: #657086;
 
+        /* 文字サイズを小さくします。 */
         font-size: 0.7rem;
 
+        /* 文字間隔を少し広げます。 */
         letter-spacing: 0.08em;
     }
 
-    /* =========================
-       ロゴ表示アニメーション
-       ========================= */
+/* =========================
+   ロゴ表示アニメーション
+   ========================= */
 
+/* logoFadeという名前のアニメーションを定義します。 */
     @keyframes logoFade {
+
+        /* アニメーション開始時の状態です。 */
         from {
+            /* 最初は透明にします。 */
             opacity: 0;
+
+            /* 最初は15px下に配置します。 */
             transform: translateY(15px);
         }
 
+        /* アニメーション終了時の状態です。 */
         to {
+            /* 最後は完全に表示します。 */
             opacity: 1;
+
+            /* 元の位置へ戻します。 */
             transform: translateY(0);
         }
     }
 
-    /* =========================
-       スマートフォン
-       ========================= */
+/* =========================
+   スマートフォン
+   ========================= */
 
+/* 画面幅が600px以下の場合の設定です。 */
     @media (max-width: 600px) {
 
+        /* メインエリアの設定をスマートフォン用に変更します。 */
         .content-main {
+            /* 上下左右の余白を小さくします。 */
             padding: 55px 18px 70px;
         }
 
+        /* ロゴの設定をスマートフォン用に変更します。 */
         .header-logo {
+            /* ロゴの最大幅を360pxにします。 */
             max-width: 360px;
+
+            /* ロゴの下の余白を45pxにします。 */
             margin-bottom: 45px;
         }
 
+        /* メニュー全体の設定です。 */
         .menu-container {
+            /* 横幅を画面いっぱいまで使用できるようにします。 */
             max-width: 100%;
+
+            /* ボタン同士の間隔を14pxにします。 */
             gap: 14px;
         }
 
+        /* メインボタンのスマートフォン用設定です。 */
         .btn-portal {
+            /* ボタンの内側の余白を小さくします。 */
             padding: 20px 22px;
+
+            /* 文字を少し小さくします。 */
             font-size: 1rem;
         }
 
+        /* お問い合わせエリアのスマートフォン用設定です。 */
         .contact-section {
+            /* 上下左右の余白を小さくします。 */
             padding: 40px 15px 30px;
         }
 
+        /* お問い合わせボタンをスマートフォンでは縦に並べます。 */
         .contact-btn-group {
+            /* ボタンを縦方向に並べます。 */
             flex-direction: column;
+
+            /* ボタン同士の間隔を9pxにします。 */
             gap: 9px;
         }
 
+        /* お問い合わせボタンのスマートフォン用設定です。 */
         .btn-contact {
+            /* ボタンの横幅を100%にします。 */
             width: 100%;
+
+            /* ボタンが大きくなりすぎないように最大幅を360pxにします。 */
             max-width: 360px;
         }
     }
+/* スマートフォン用設定を終了します。 */
+
 </style>
+<!-- CSSの記述を終了します。 -->
+
 </head>
+<!-- head部分を終了します。 -->
+
 <body>
+<!-- 実際に画面へ表示する内容を記述する部分です。 -->
 
     <div class="wrapper">
+    <!-- ページ全体を包む大きなコンテナです。 -->
+
         <div class="content-main">
+        <!-- ページ中央に表示するメインコンテンツです。 -->
+
             <!-- <div class="header-logo">
                 <img src="images/title_logo.png" alt="虎の巻 ロゴ">
             </div> -->
+            <!-- ロゴを表示するHTMLです。
+                 現在はコメントアウトされているため表示されません。 -->
 
             <div class="menu-container">
+            <!-- 3つのメインメニューボタンをまとめる部分です。 -->
+
                 <a href="https://script.google.com/macros/s/AKfycbwPE2Yn3kUK8ZYs2faA-TbWXcIPSCMoYmhu3941g6ba0Uukj-6HR0xLtpoZkjufLdQFZA/exec" target="_blank" rel="noopener noreferrer" class="btn-portal">選択問題</a>
+                <!-- 「選択問題」というボタンです。
+                     クリックすると指定されたGASのWebアプリを新しいタブで開きます。 -->
+
                 <a href="https://script.google.com/macros/s/AKfycbwPE2Yn3kUK8ZYs2faA-TbWXcIPSCMoYmhu3941g6ba0Uukj-6HR0xLtpoZkjufLdQFZA/exec" target="_blank" rel="noopener noreferrer" class="btn-portal">Drag & Drop</a>
+                <!-- 「Drag & Drop」というボタンです。
+                     クリックすると指定されたGASのWebアプリを新しいタブで開きます。 -->
+
                 <a href="simulation.html" target="_blank" rel="noopener noreferrer" class="btn-portal">Simulation</a>
+                <!-- 「Simulation」というボタンです。
+                     クリックすると同じWebサイト内のsimulation.htmlを新しいタブで開きます。 -->
+
             </div>
+            <!-- メニューボタンのまとまりを終了します。 -->
+
         </div>
+        <!-- メインエリアを終了します。 -->
+
 
         <div class="contact-section">
+        <!-- お問い合わせエリア全体です。 -->
+
             <h2>お問い合わせ窓口</h2>
+            <!-- お問い合わせエリアの見出しです。 -->
+
             <div class="contact-btn-group">
+            <!-- お問い合わせ用のボタンをまとめる部分です。 -->
+
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfzrDwJ23gbljfoM2IcW7wxvnqWYS9UR5TToH2EhZDbekZvaQ/viewform?usp=publish-editor" target="_blank" class="btn-contact">不具合報告 / 機能改善リクエスト</a>
+                <!-- 不具合報告や機能改善リクエストを送るGoogleフォームへのリンクです。 -->
+
                 <a href="https://drive.google.com/file/d/1wizk3JEMIU4PmgTvzL-Ag6XEEkupAv9r/view?usp=sharing" target="_blank" class="btn-contact">本番試験前の注意事項</a>              
+                <!-- Google Driveにある「本番試験前の注意事項」を開くリンクです。 -->
+
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6WoQEejmMm5kKrt2QsZPJEgG5atE-VX9Fbw4AqBp6oB0OLg/viewform?usp=dialog" target="_blank" class="btn-contact">試験後フィードバック</a>
+                <!-- 試験後のフィードバックを送るGoogleフォームへのリンクです。 -->
+
             </div>
+            <!-- お問い合わせボタンのまとまりを終了します。 -->
+
             <div class="copyright">&copy; 2026 CCNP 虎の巻 Project</div>
+            <!-- ページ下部に著作権表示を表示します。 -->
+
         </div>
+        <!-- お問い合わせエリアを終了します。 -->
+
     </div>
+    <!-- ページ全体のwrapperを終了します。 -->
 
 </body>
 </html>
